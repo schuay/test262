@@ -2,7 +2,8 @@
 // This code is governed by the BSD license found in the LICENSE file.
 
 /*---
-description: Setting `lastIndex` to `0` after a match failure
+description: >
+    Behavior when error thrown while setting `lastIndex` after a match failure
 es6id: 21.2.5.6
 info: >
     [...]
@@ -31,9 +32,11 @@ info: >
 features: [Symbol.match]
 ---*/
 
-var r = /a/;
-r.lastIndex = 3;
+// TODO: Update the comment.
 
-r[Symbol.match]('b');
+var r = /a/g;
+Object.defineProperty(r, 'lastIndex', { writable: false });
 
-assert.sameValue(r.lastIndex, 0);
+assert.throws(TypeError, function() {
+  r[Symbol.match]('b');
+});

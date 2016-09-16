@@ -13,13 +13,16 @@ info: >
 features: [Symbol.search]
 ---*/
 
+// TODO: Update the comment.
+
 var callCount;
 var poisonedLastIndex = {
-  get lastIndex() {},
+  get lastIndex() { return this.lastIndex_; },
   set lastIndex(_) {
     if (callCount === 1) {
       throw new Test262Error();
     }
+    this.lastIndex_ = _;
   },
   exec: function() {
     callCount += 1;

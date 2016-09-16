@@ -21,6 +21,8 @@ info: >
 features: [Symbol.match]
 ---*/
 
+// TODO: Update the comment.
+
 var r = /./y;
 var result;
 

@@ -22,7 +22,9 @@ info: >
 features: [Symbol.match]
 ---*/
 
-var r = /./;
+// TODO: Update the comment.
+
+var r = /./y;
 r.lastIndex = {
   valueOf: function() {
     throw new Test262Error();

@@ -11,15 +11,19 @@ info: >
 features: [Symbol.search]
 ---*/
 
-var latestValue;
+// TODO: Update the comment.
+
+var latestValue = 86;
+var callCount = 0;
 var fakeRe = {
   get lastIndex() {
-    return 86;
+    return latestValue;
   },
   set lastIndex(_) {
     latestValue = _;
   },
   exec: function() {
+    callCount++;
     latestValue = null;
     return null;
   }
@@ -27,4 +31,5 @@ var fakeRe = {
 
 RegExp.prototype[Symbol.search].call(fakeRe);
 
+assert.sameValue(callCount, 1);
 assert.sameValue(latestValue, 86);
